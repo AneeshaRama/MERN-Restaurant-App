@@ -15,10 +15,17 @@ const loginValid = (email, password) => {
   if (!password) return "Please enter your password";
 };
 
+const addFoodErrorHandler = (name, category, cost, description) => {
+  if (!name) return "Please enter food name";
+  if (!category) return "Please enter food category";
+  if (!cost) return "Please enter food cost";
+  if (!description) return "Please enter food description";
+};
+
 function validateEmail(email) {
   const re =
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 }
 
-module.exports = { registerValid, loginValid };
+module.exports = { registerValid, loginValid, addFoodErrorHandler };

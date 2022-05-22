@@ -25,7 +25,7 @@ const authController = {
         message: "You have successfully registered. Please login now",
       });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(500).json({ message: error.message });
     }
   },
   login: async (req, res) => {
@@ -51,7 +51,7 @@ const authController = {
         .status(200)
         .json({ message: "You have successfully logged in", user, token });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(500).json({ message: error.message });
     }
   },
 };
