@@ -1,0 +1,22 @@
+{
+  "name": "StarterFiles",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.7.0",
+    "@mui/styles": "^5.7.0",
+    "autoprefixer": "^10.4.7",
+    "next": "^12.1.6",
+    "postcss": "^8.4.13",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "tailwindcss": "^3.0.24"
+  },
+  "scripts": {
+    "dev": "next dev"
+  }
+}

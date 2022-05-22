@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+body {
+  min-height: 80vh;
+  background-color: #111827;
+  color: #dcfce7;
+}
+
+.logo {
+  font-family: "Niconne", cursive;
+}
