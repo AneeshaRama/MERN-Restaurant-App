@@ -7,6 +7,7 @@ import {
   Menu,
   Home,
   PersonAdd,
+  AdminPanelSettingsOutlined,
 } from "@mui/icons-material";
 
 const Navbar = () => {
@@ -37,7 +38,7 @@ const Navbar = () => {
                   <Link href={"/"}>
                     <a>
                       <div
-                        className="flex mt-3 space-x-5 justify-center items-center"
+                        className="flex mt-3 space-x-5 justify-start ml-10 items-center"
                         onClick={() => setOpenDrawer(false)}
                       >
                         <Home className="text-green-500" />
@@ -48,7 +49,7 @@ const Navbar = () => {
                   <Link href={"/profile"}>
                     <a>
                       <div
-                        className="flex mt-5 space-x-5 justify-center items-center"
+                        className="flex mt-5 space-x-5 justify-start ml-10 items-center"
                         onClick={() => setOpenDrawer(false)}
                       >
                         <Person className="text-green-500" />
@@ -58,10 +59,23 @@ const Navbar = () => {
                       </div>
                     </a>
                   </Link>
+                  <Link href={"/admin/dashboard"}>
+                    <a>
+                      <div
+                        className="flex mt-5 space-x-5 justify-start ml-10 items-center"
+                        onClick={() => setOpenDrawer(false)}
+                      >
+                        <AdminPanelSettingsOutlined className="text-green-500" />
+                        <h1 className="text-green-100 font-semibold">
+                          Dashboard
+                        </h1>
+                      </div>
+                    </a>
+                  </Link>
                   <Link href={"/login"}>
                     <a>
                       <div
-                        className="flex mt-5 space-x-5 justify-center items-center"
+                        className="flex mt-5 space-x-5 justify-start ml-10 items-center"
                         onClick={() => setOpenDrawer(false)}
                       >
                         <PersonAdd className="text-green-500" />
@@ -77,6 +91,11 @@ const Navbar = () => {
               <Link href={"/"}>
                 <a className="cursor-pointer hover:text-green-500 transition duration-300 ease-in">
                   Home
+                </a>
+              </Link>
+              <Link href={"/admin/dashboard"}>
+                <a className="cursor-pointer hover:text-green-500 transition duration-300 ease-in">
+                  Dashbord
                 </a>
               </Link>
               <Link href={"/login"}>

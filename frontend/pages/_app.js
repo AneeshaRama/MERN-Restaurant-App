@@ -1,5 +1,6 @@
 import { StyledEngineProvider } from "@mui/material";
 import Head from "next/head";
+import Footer from "../components/Footer";
 import Navbar from "../components/navbar/Navbar";
 import "../styles/globals.css";
 
@@ -12,6 +13,7 @@ function MyApp({ Component, pageProps }) {
       <StyledEngineProvider injectFirst>
         <Navbar />
         <Component {...pageProps} />
+        <Footer />
       </StyledEngineProvider>
     </>
   );
