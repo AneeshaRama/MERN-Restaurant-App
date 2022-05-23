@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AdminDrawer from "../../components/admin/AdminDrawer";
 import AdminSidebar from "../../components/admin/AdminSidebar";
 import { Add, Cancel, Image } from "@mui/icons-material";
 import { Modal, Tooltip } from "@mui/material";
+import { useSelector } from "react-redux";
+import Router from "next/router";
 
 const foods = () => {
   const [openModal, setOpenModal] = useState(false);
+  const {
+    user: { user },
+  } = useSelector((state) => state);
+
+  useEffect(() => {
+    if (user === null) {
+      Router.push("/");
+    }
+  }, [user]);
   return (
     <>
       <div className="hidden md:flex justify-center max-w-6xl mx-auto min-h-[83vh] p-3 ">

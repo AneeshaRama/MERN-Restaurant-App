@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
+import { useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
 import Loading from "../components/Loading";
 import Router from "next/router";
@@ -12,6 +13,16 @@ const register = () => {
   const [cf_password, setCf_password] = useState("");
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const {
+    user: { user },
+  } = useSelector((state) => state);
+
+  useEffect(() => {
+    if (user !== null) {
+      Router.push("/");
+    }
+  }, [user]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

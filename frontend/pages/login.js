@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogin } from "../redux/slices/userSlice";
 import { useSnackbar } from "notistack";
@@ -12,7 +12,17 @@ const login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const {
+    user: { user },
+  } = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user !== null) {
+      Router.push("/");
+    }
+  }, [user]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
