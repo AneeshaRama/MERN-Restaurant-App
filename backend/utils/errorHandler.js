@@ -15,11 +15,12 @@ const loginValid = (email, password) => {
   if (!password) return "Please enter your password";
 };
 
-const addFoodErrorHandler = (name, category, cost, description) => {
+const addFoodErrorHandler = (name, category, cost, description, image) => {
   if (!name) return "Please enter food name";
   if (!category) return "Please enter food category";
   if (!cost) return "Please enter food cost";
   if (!description) return "Please enter food description";
+  if (!image) return "Please add food image";
 };
 
 function validateEmail(email) {

@@ -8,6 +8,7 @@ const Loading = () => {
         color: "white",
         top: 0,
         left: 0,
+        opacity: 50,
         zIndex: 9,
       }}
     >

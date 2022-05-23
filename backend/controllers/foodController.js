@@ -4,12 +4,13 @@ const { addFoodErrorHandler } = require("../utils/errorHandler");
 const foodController = {
   addFood: async (req, res) => {
     try {
-      const { name, category, cost, description } = req.body;
+      const { name, category, cost, description, image } = req.body;
       const errorMessage = addFoodErrorHandler(
         name,
         category,
         cost,
-        description
+        description,
+        image
       );
       if (errorMessage) return res.status(400).json({ message: errorMessage });
       const food = await new Foods({
@@ -17,6 +18,7 @@ const foodController = {
         category,
         cost,
         description,
+        image,
       }).save();
       res.status(201).json({ message: "Successfully added new food", food });
     } catch (error) {
