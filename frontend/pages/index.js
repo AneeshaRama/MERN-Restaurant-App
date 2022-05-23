@@ -20,7 +20,7 @@ const Home = () => {
         </div>
         <div className="h-full flex justify-center items-center">
           <img
-            src="https://res.cloudinary.com/ascdae373dbcb/image/upload/v1653207144/home-page_ldrxp1.png"
+            src="https://res.cloudinary.com/jamesmarycloud/image/upload/v1653207144/home-page_ldrxp1.png"
             alt=""
             className="md:h-[400px] sm:h-[300px] h-60 object-fill"
           />

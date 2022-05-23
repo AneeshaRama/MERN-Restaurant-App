@@ -38,7 +38,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="max-w-6xl mx-auto flex items-center justify-between h-20 p-3">
+      <nav className="max-w-6xl mx-auto flex items-center justify-between h-20 p-3 z-50 sticky top-0 bg-gray-900">
         <div>
           <Link href={"/"}>
             <a>

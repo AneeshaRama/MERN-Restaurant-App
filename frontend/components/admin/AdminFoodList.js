@@ -1,31 +1,39 @@
-import React, { useState, useEffect } from "react";
-import AdminDrawer from "../../components/admin/AdminDrawer";
-import AdminSidebar from "../../components/admin/AdminSidebar";
-import { Add, Cancel, Delete, Edit, Image } from "@mui/icons-material";
-import { Modal, Tooltip } from "@mui/material";
-import { useSelector } from "react-redux";
+import { Cancel, Delete, Edit, Image } from "@mui/icons-material";
+import React, { useState } from "react";
 import { useSnackbar } from "notistack";
-import Router from "next/router";
 import axios from "axios";
-import Loading from "../../components/Loading";
-import AdminFoodList from "../../components/admin/AdminFoodList";
+import { Modal } from "@mui/material";
 
-const foods = ({ result }) => {
+const AdminFoodList = ({ item }) => {
   const [openModal, setOpenModal] = useState(false);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [cost, setCost] = useState("");
   const [description, setDescription] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
-  const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
-  const {
-    user: { user },
-  } = useSelector((state) => state);
+  const handleDelete = async () => {
+    const token = JSON.parse(window.localStorage.getItem("token"));
+    await axios
+      .delete(`${process.env.NEXT_PUBLIC_BASE_URL}/food/${item._id}`, {
+        headers: { Authorization: token },
+      })
+      .then((data) => {
+        enqueueSnackbar(data.data.message, {
+          variant: "success",
+          autoHideDuration: 3000,
+        });
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.message, {
+          variant: "error",
+          autoHideDuration: 3000,
+        });
+      });
+  };
 
-  const handleSubmit = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    setLoading(true);
     const token = JSON.parse(window.localStorage.getItem("token"));
     const formData = new FormData();
     formData.append("file", selectedImage);
@@ -40,10 +48,9 @@ const foods = ({ result }) => {
     });
 
     const data = await res.json();
-
     await axios
-      .post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/food/new`,
+      .put(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/food/${item._id}`,
         {
           name,
           category,
@@ -51,23 +58,17 @@ const foods = ({ result }) => {
           description,
           image: data.secure_url,
         },
-        { headers: { Authorization: token } }
+        {
+          headers: { Authorization: token },
+        }
       )
       .then((data) => {
-        setLoading(false);
-        setName("");
-        setCategory("");
-        setCost("");
-        setDescription("");
-        setSelectedImage("");
-        setOpenModal(false);
         enqueueSnackbar(data.data.message, {
           variant: "success",
           autoHideDuration: 3000,
         });
       })
       .catch((err) => {
-        setLoading(false);
         enqueueSnackbar(err.response.data.message, {
           variant: "error",
           autoHideDuration: 3000,
@@ -75,58 +76,25 @@ const foods = ({ result }) => {
       });
   };
 
-  useEffect(() => {
-    if (user === null) {
-      Router.push("/");
-    }
-  }, [user]);
   return (
     <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          <div className="hidden md:flex justify-center max-w-6xl mx-auto min-h-[83vh] p-3 ">
-            <AdminSidebar />
-            <div className="flex-grow min-w-fit ml-5">
-              <div className="flex flex-col items-center">
-                <h1 className="text-lg font-semibold text-green-400 mb-5">
-                  FOOD ITEMS
-                </h1>
-                {result.map((item) => {
-                  return <AdminFoodList key={item._id} item={item} />;
-                })}
-              </div>
-            </div>
-          </div>
-          <div className="min-h-[83vh] p-3 md:hidden">
-            {/* Mobile virsion */}
-            <div className="flex flex-col">
-              <AdminDrawer />
-              <div className="flex flex-col justify-center items-center mt-3">
-                <h1 className="text-lg font-semibold text-green-400">
-                  FOOD ITEMS
-                </h1>
-                {result.map((item) => {
-                  return <AdminFoodList key={item._id} item={item} />;
-                })}
-              </div>
-            </div>
-          </div>
-          <Tooltip title="Add new food">
-            <div
-              className="fixed h-14 w-14 cursor-pointer hover:scale-110 transition duration-300 ease-in bottom-32 right-4 md:right-28 rounded-full bg-green-600 flex justify-center items-center"
-              onClick={() => setOpenModal(true)}
-            >
-              <Add className="text-white font-bold text-3xl" />
-            </div>
-          </Tooltip>
+      <div className="flex justify-between items-center p-3 bg-gray-600 w-[18rem] md:w-[20rem] lg:w-[25rem]  rounded-xl mb-3">
+        <h1 className="text-green-100 font-semibold">{item.name}</h1>
+        <div>
+          <Edit
+            onClick={() => setOpenModal(true)}
+            className="text-green-400 cursor-pointer"
+          />
+          <Delete
+            onClick={handleDelete}
+            className="text-green-400 ml-3 cursor-pointer"
+          />
           <Modal open={openModal} onClose={() => setOpenModal(false)}>
             <div className="h-full w-full md:h-[600px] md:w-[450px] border-none rounded-lg outline-none bg-gray-700 absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2">
               <div className="flex flex-col items-center relative justify-center h-full">
                 <form
                   className="flex flex-col items-center justify-center"
-                  onSubmit={handleSubmit}
+                  onSubmit={handleUpdate}
                 >
                   <input
                     value={name}
@@ -172,7 +140,7 @@ const foods = ({ result }) => {
                   </div>
                   <input
                     type="submit"
-                    value={"Add New Food"}
+                    value={"Update"}
                     className="bg-white text-green-500 font-bold p-3 outline-none rounded-lg w-full cursor-pointer mt-3 hover:bg-green-400 hover:text-white transition duration-300 ease-in"
                   />
                 </form>
@@ -185,20 +153,10 @@ const foods = ({ result }) => {
               </div>
             </div>
           </Modal>
-        </>
-      )}
+        </div>
+      </div>
     </>
   );
 };
 
-export async function getStaticProps() {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/foods`);
-
-  return {
-    props: {
-      result: data.foods,
-    },
-  };
-}
-
-export default foods;
+export default AdminFoodList;

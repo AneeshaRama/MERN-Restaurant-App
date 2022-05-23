@@ -7,7 +7,7 @@ const AdminDrawer = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center z-40 fixed top-20 p-2 bg-gray-900 w-[95vw] mx-auto">
         <h1 className="text-lg font-semibold text-green-100">DASHBOARD</h1>
         <MoreVert
           onClick={() => setOpenDrawer(!openDrawer)}

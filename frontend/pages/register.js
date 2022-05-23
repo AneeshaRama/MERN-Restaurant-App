@@ -109,7 +109,7 @@ const register = () => {
             </div>
             <div className="hidden md:flex h-full  justify-center items-center">
               <img
-                src="https://res.cloudinary.com/ascdae373dbcb/image/upload/v1653201598/register-page_koqqzb.png"
+                src="https://res.cloudinary.com/jamesmarycloud/image/upload/v1653201598/register-page_koqqzb.png"
                 className="h-[400px]"
               />
             </div>

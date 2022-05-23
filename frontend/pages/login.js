@@ -61,7 +61,7 @@ const login = () => {
           <div className="max-w-6xl mx-auto min-h-[85vh] grid md:grid-cols-2">
             <div className="hidden md:flex h-full  justify-center items-center">
               <img
-                src="https://res.cloudinary.com/ascdae373dbcb/image/upload/v1653199653/login-page_a0ovkz.png"
+                src="https://res.cloudinary.com/jamesmarycloud/image/upload/v1653199653/login-page_a0ovkz.png"
                 className="h-[400px]"
               />
             </div>
