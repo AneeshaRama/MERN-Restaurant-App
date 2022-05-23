@@ -6,10 +6,10 @@ import Loading from "../components/Loading";
 import Router from "next/router";
 
 const register = () => {
-  const [name, setName] = useState("Test");
-  const [email, setEmail] = useState("test@test.com");
-  const [password, setPassword] = useState("123456");
-  const [cf_password, setCf_password] = useState("123456");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cf_password, setCf_password] = useState("");
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const handleSubmit = async (e) => {
