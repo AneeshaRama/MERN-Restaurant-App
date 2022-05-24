@@ -4,7 +4,7 @@ import Link from "next/link";
 const FoodLinks = () => {
   return (
     <>
-      <div className="hidden md:flex items-center justify-center space-x-10  font-bold text-green-600 mt-5">
+      <div className="hidden md:flex items-center justify-center space-x-10  font-bold text-green-400 mt-5">
         <Link href={"/foods/dosa"}>
           <p className="hover:scale-125 transition duration-300 text-lg ease-in cursor-pointer">
             Dosa

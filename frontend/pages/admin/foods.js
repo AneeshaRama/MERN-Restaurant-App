@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import AdminDrawer from "../../components/admin/AdminDrawer";
 import AdminSidebar from "../../components/admin/AdminSidebar";
-import { Add, Cancel, Delete, Edit, Image } from "@mui/icons-material";
+import { Add, Cancel, Image } from "@mui/icons-material";
 import { Modal, Tooltip } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchFoods } from "../../redux/slices/foodSlice";
 import { useSnackbar } from "notistack";
 import Router from "next/router";
 import axios from "axios";
@@ -21,7 +22,14 @@ const foods = ({ result }) => {
   const { enqueueSnackbar } = useSnackbar();
   const {
     user: { user },
+    food: { data },
   } = useSelector((state) => state);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFoods());
+  }, [data]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +47,7 @@ const foods = ({ result }) => {
       body: formData,
     });
 
-    const data = await res.json();
+    const res2 = await res.json();
 
     await axios
       .post(
@@ -49,7 +57,7 @@ const foods = ({ result }) => {
           category,
           cost,
           description,
-          image: data.secure_url,
+          image: res2.secure_url,
         },
         { headers: { Authorization: token } }
       )
@@ -93,7 +101,7 @@ const foods = ({ result }) => {
                 <h1 className="text-lg font-semibold text-green-400 mb-5">
                   FOOD ITEMS
                 </h1>
-                {result.map((item) => {
+                {data.map((item) => {
                   return <AdminFoodList key={item._id} item={item} />;
                 })}
               </div>
@@ -107,7 +115,7 @@ const foods = ({ result }) => {
                 <h1 className="text-lg font-semibold text-green-400">
                   FOOD ITEMS
                 </h1>
-                {result.map((item) => {
+                {data.map((item) => {
                   return <AdminFoodList key={item._id} item={item} />;
                 })}
               </div>
@@ -190,15 +198,5 @@ const foods = ({ result }) => {
     </>
   );
 };
-
-export async function getStaticProps() {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/foods`);
-
-  return {
-    props: {
-      result: data.foods,
-    },
-  };
-}
 
 export default foods;

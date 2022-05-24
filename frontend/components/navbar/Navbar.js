@@ -6,13 +6,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useSnackbar } from "notistack";
 import Router from "next/router";
 import {
-  Person,
   ShoppingBasket,
   Menu,
   Home,
   PersonAdd,
   AdminPanelSettingsOutlined,
   Logout,
+  Explore,
 } from "@mui/icons-material";
 
 const Navbar = () => {
@@ -21,6 +21,7 @@ const Navbar = () => {
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const {
     user: { user },
+    cart,
   } = useSelector((state) => state);
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -68,23 +69,22 @@ const Navbar = () => {
                       </div>
                     </a>
                   </Link>
-                  {user !== null && (
-                    <Link href={"/profile"}>
-                      <a>
-                        <div
-                          className="flex mt-5 space-x-5 justify-start ml-10 items-center"
-                          onClick={() => setOpenDrawer(false)}
-                        >
-                          <Person className="text-green-500" />
-                          <h1 className="text-green-100 font-semibold">
-                            Profile
-                          </h1>
-                        </div>
-                      </a>
-                    </Link>
-                  )}
+                  <Link href={"/foods"}>
+                    <a>
+                      <div
+                        className="flex mt-3 space-x-5 justify-start ml-10 items-center"
+                        onClick={() => setOpenDrawer(false)}
+                      >
+                        <Explore className="text-green-500" />
+                        <h1 className="text-green-100 font-semibold">
+                          Explore
+                        </h1>
+                      </div>
+                    </a>
+                  </Link>
+
                   {user !== null && user.role === "admin" && (
-                    <Link href={"/admin/dashboard"}>
+                    <Link href={"/admin/foods"}>
                       <a>
                         <div
                           className="flex mt-5 space-x-5 justify-start ml-10 items-center"
@@ -141,9 +141,14 @@ const Navbar = () => {
                   Home
                 </a>
               </Link>
+              <Link href={"/foods"}>
+                <a className="cursor-pointer hover:text-green-500 transition duration-300 ease-in">
+                  Explore
+                </a>
+              </Link>
               {user !== null && user.role === "admin" && (
                 <>
-                  <Link href={"/admin/dashboard"}>
+                  <Link href={"/admin/foods"}>
                     <a className="cursor-pointer hover:text-green-500 transition duration-300 ease-in">
                       Dashbord
                     </a>
@@ -155,11 +160,6 @@ const Navbar = () => {
                   <a className="cursor-pointer hover:text-green-500 transition duration-300 ease-in">
                     <h1 onClick={handleLogout}>Logout</h1>
                   </a>
-                  <Link href={"/profile"}>
-                    <a className="cursor-pointer hover:text-green-500 transition duration-300 ease-in">
-                      <Person />
-                    </a>
-                  </Link>
                 </>
               ) : (
                 <>
@@ -176,9 +176,11 @@ const Navbar = () => {
           <Link href={"/cart"}>
             <a className="cursor-pointer hover:text-green-500 transition duration-300 relative ease-in">
               <ShoppingBasket />
-              <p className="absolute -top-1 -right-2 text-sm bg-red-500 text-white justify-center flex animate-bounce items-center rounded-full h-5 w-5">
-                1
-              </p>
+              {cart.length > 0 && (
+                <p className="absolute -top-1 -right-2 text-sm bg-red-500 text-white justify-center flex animate-bounce items-center rounded-full h-5 w-5">
+                  {cart.length}
+                </p>
+              )}
             </a>
           </Link>
           {isMatch && (
