@@ -86,7 +86,7 @@ const foods = ({ result }) => {
         <Loading />
       ) : (
         <>
-          <div className="hidden md:flex justify-center max-w-6xl mx-auto min-h-[83vh] p-3 ">
+          <div className="hidden lg:flex justify-center max-w-6xl mx-auto min-h-[83vh] p-3 ">
             <AdminSidebar />
             <div className="flex-grow min-w-fit ml-5">
               <div className="flex flex-col items-center">
@@ -99,7 +99,7 @@ const foods = ({ result }) => {
               </div>
             </div>
           </div>
-          <div className="min-h-[83vh] p-3 md:hidden">
+          <div className="min-h-[83vh] p-3 lg:hidden">
             {/* Mobile virsion */}
             <div className="flex flex-col">
               <AdminDrawer />

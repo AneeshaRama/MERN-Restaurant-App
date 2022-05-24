@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const Home = () => {
   return (
@@ -14,9 +15,11 @@ const Home = () => {
               Swirly
             </span>
           </p>
-          <button className="hover:bg-green-400 hover:text-white bg-green-100 text-green-600 tracking-widest transition duration-300 ease-in-out font-bold p-3 rounded-lg cursor-pointer mt-4">
-            Order Now
-          </button>
+          <Link href={"/foods"}>
+            <button className="hover:bg-green-400 hover:text-white bg-green-100 text-green-600 tracking-widest transition duration-300 ease-in-out font-bold p-3 rounded-lg cursor-pointer mt-4">
+              Order Now
+            </button>
+          </Link>
         </div>
         <div className="h-full flex justify-center items-center">
           <img
