@@ -1,4 +1,5 @@
 const Orders = require("../models/orderModel");
+const Users = require("../models/userModel");
 const { makeOrderErrorHandler } = require("../utils/errorHandler");
 
 const orderController = {
@@ -12,6 +13,11 @@ const orderController = {
         address
       );
       if (errorMessage) return res.status(400).json({ message: errorMessage });
+      const user = await Users.findOne({ email });
+      if (!user)
+        return res
+          .status(400)
+          .json({ message: "wrong email address.Please retry" });
       await new Orders({ name, email, foodName, address }).save();
       res.status(201).json({
         message: "You have successfully placed order",

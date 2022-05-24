@@ -16,7 +16,7 @@ const cart = () => {
           <div className="min-h-[80vh] grid md:grid-cols-2 max-w-6xl mx-auto">
             <div className="flex flex-col justify-center items-between p-2">
               {cart.map((item) => {
-                return <CartItem key={item.id} item={item} />;
+                return <CartItem key={item._id} item={item} />;
               })}
             </div>
             <div>
@@ -37,9 +37,11 @@ const cart = () => {
                   </span>{" "}
                   : Rs.{totalAmount}
                 </p>
-                <button className="bg-green-500 hover:bg-purple-50 rounded-lg text-white transition duration-300 ease-linear mt-5 border-2 border-green-600 font-bold hover:text-green-500 p-3">
-                  Order Now
-                </button>
+                <Link href={"/order"}>
+                  <button className="bg-green-500 hover:bg-purple-50 rounded-lg text-white transition duration-300 ease-linear mt-5 border-2 border-green-600 font-bold hover:text-green-500 p-3">
+                    Order Now
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

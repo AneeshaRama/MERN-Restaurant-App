@@ -39,15 +39,6 @@ const AdminDrawer = () => {
                 <h1 className="text-green-100 font-semibold">Users</h1>
               </div>
             </Link>
-            <Link href={"/admin/orders"}>
-              <div className="flex justify-start items-center cursor-pointer space-x-4">
-                <Bookmark
-                  onClick={() => setOpenDrawer(false)}
-                  className="text-green-400"
-                />
-                <h1 className="text-green-100 font-semibold">Orders</h1>
-              </div>
-            </Link>
           </div>
         </div>
       </Drawer>
