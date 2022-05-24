@@ -1,6 +1,6 @@
 const express = require("express");
 const foodController = require("../controllers/foodController");
-const { adminAuthMiddleware } = require("../middlewares/authMiddleware");
+const adminAuthMiddleware = require("../middlewares/authMiddleware");
 const router = express.Router();
 
 router.post("/food/new", adminAuthMiddleware, foodController.addFood);
