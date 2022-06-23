@@ -1,8 +1,8 @@
-# **MERN stack Food-Delivery-Application**
+# **MERN stack Restaurant App**
 
 #### Project link: https://swirly-food-delivery-app.vercel.app/
 
-This is **Full stack** Food delivery application using **NextJS**(a production ready framework for ReactJS), **NodeJS**, **ExpressJS**, **MongoDB** and **TailwindCSS**.
+This is **Full stack** Restaurant app using **NextJS**(a production ready framework for ReactJS), **NodeJS**, **ExpressJS**, **MongoDB** and **TailwindCSS**.
 I have created my own server using **NodeJS** and **ExpressJS** and **MongoDB**(noSQL database) as databse to store the information.
 
 ### Tools used to build this project
